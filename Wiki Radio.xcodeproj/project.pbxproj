@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		002EBA131B10C22000C4A521 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA121B10C22000C4A521 /* AVFoundation.framework */; };
+		002EBA151B10C22F00C4A521 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA141B10C22F00C4A521 /* CoreGraphics.framework */; };
+		002EBA171B10C23A00C4A521 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA161B10C23A00C4A521 /* UIKit.framework */; };
+		002EBA191B10C24200C4A521 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA181B10C24200C4A521 /* Foundation.framework */; };
+		0054C3081B10D9B700AB70BF /* sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0054C3071B10D9B700AB70BF /* sample.mp3 */; };
+		0054C30A1B10DA4700AB70BF /* playButton.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0054C3091B10DA4700AB70BF /* playButton.gif */; };
 		257062741B107CA000C0EE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257062731B107CA000C0EE63 /* AppDelegate.swift */; };
 		257062761B107CA000C0EE63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257062751B107CA000C0EE63 /* ViewController.swift */; };
 		257062791B107CA000C0EE63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257062771B107CA000C0EE63 /* Main.storyboard */; };
@@ -26,6 +32,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		002EBA121B10C22000C4A521 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		002EBA141B10C22F00C4A521 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		002EBA161B10C23A00C4A521 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		002EBA181B10C24200C4A521 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0054C3071B10D9B700AB70BF /* sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sample.mp3; path = "../../../../Downloads/iOS-8-Swift-Programming-Cookbook-master/chapter-multimedia/Playing Audio Files/Playing Audio Files/sample.mp3"; sourceTree = "<group>"; };
+		0054C3091B10DA4700AB70BF /* playButton.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = playButton.gif; path = ../../../../Downloads/playButton.gif; sourceTree = "<group>"; };
 		2570626E1B107CA000C0EE63 /* Wiki Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wiki Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257062721B107CA000C0EE63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		257062731B107CA000C0EE63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -43,6 +55,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				002EBA191B10C24200C4A521 /* Foundation.framework in Frameworks */,
+				002EBA171B10C23A00C4A521 /* UIKit.framework in Frameworks */,
+				002EBA151B10C22F00C4A521 /* CoreGraphics.framework in Frameworks */,
+				002EBA131B10C22000C4A521 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +78,10 @@
 				257062701B107CA000C0EE63 /* Wiki Radio */,
 				257062861B107CA100C0EE63 /* Wiki RadioTests */,
 				2570626F1B107CA000C0EE63 /* Products */,
+				002EBA121B10C22000C4A521 /* AVFoundation.framework */,
+				002EBA141B10C22F00C4A521 /* CoreGraphics.framework */,
+				002EBA161B10C23A00C4A521 /* UIKit.framework */,
+				002EBA181B10C24200C4A521 /* Foundation.framework */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,6 +102,7 @@
 				257062771B107CA000C0EE63 /* Main.storyboard */,
 				2570627A1B107CA000C0EE63 /* Images.xcassets */,
 				2570627C1B107CA100C0EE63 /* LaunchScreen.xib */,
+				0054C3091B10DA4700AB70BF /* playButton.gif */,
 				257062711B107CA000C0EE63 /* Supporting Files */,
 			);
 			path = "Wiki Radio";
@@ -90,6 +111,7 @@
 		257062711B107CA000C0EE63 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0054C3071B10D9B700AB70BF /* sample.mp3 */,
 				257062721B107CA000C0EE63 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -194,6 +216,8 @@
 			files = (
 				257062791B107CA000C0EE63 /* Main.storyboard in Resources */,
 				2570627E1B107CA100C0EE63 /* LaunchScreen.xib in Resources */,
+				0054C30A1B10DA4700AB70BF /* playButton.gif in Resources */,
+				0054C3081B10D9B700AB70BF /* sample.mp3 in Resources */,
 				2570627B1B107CA000C0EE63 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -343,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Wiki Radio/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -353,6 +378,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = "Wiki Radio/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -411,6 +437,7 @@
 				2570628F1B107CA100C0EE63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		257062901B107CA100C0EE63 /* Build configuration list for PBXNativeTarget "Wiki RadioTests" */ = {
 			isa = XCConfigurationList;
@@ -419,6 +446,7 @@
 				257062921B107CA100C0EE63 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
