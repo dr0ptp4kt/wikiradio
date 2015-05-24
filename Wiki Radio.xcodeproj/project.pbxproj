@@ -11,8 +11,8 @@
 		002EBA151B10C22F00C4A521 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA141B10C22F00C4A521 /* CoreGraphics.framework */; };
 		002EBA171B10C23A00C4A521 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA161B10C23A00C4A521 /* UIKit.framework */; };
 		002EBA191B10C24200C4A521 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002EBA181B10C24200C4A521 /* Foundation.framework */; };
-		0054C3081B10D9B700AB70BF /* sample.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0054C3071B10D9B700AB70BF /* sample.mp3 */; };
-		0054C30A1B10DA4700AB70BF /* playButton.gif in Resources */ = {isa = PBXBuildFile; fileRef = 0054C3091B10DA4700AB70BF /* playButton.gif */; };
+		253F08611B113DFF00E19C1A /* Abhogi.wav in Resources */ = {isa = PBXBuildFile; fileRef = 253F08601B113DFF00E19C1A /* Abhogi.wav */; };
+		253F08631B117D1500E19C1A /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 253F08621B117D1500E19C1A /* MediaPlayer.framework */; };
 		257062741B107CA000C0EE63 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257062731B107CA000C0EE63 /* AppDelegate.swift */; };
 		257062761B107CA000C0EE63 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257062751B107CA000C0EE63 /* ViewController.swift */; };
 		257062791B107CA000C0EE63 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 257062771B107CA000C0EE63 /* Main.storyboard */; };
@@ -36,8 +36,8 @@
 		002EBA141B10C22F00C4A521 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		002EBA161B10C23A00C4A521 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		002EBA181B10C24200C4A521 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		0054C3071B10D9B700AB70BF /* sample.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sample.mp3; path = "../../../../Downloads/iOS-8-Swift-Programming-Cookbook-master/chapter-multimedia/Playing Audio Files/Playing Audio Files/sample.mp3"; sourceTree = "<group>"; };
-		0054C3091B10DA4700AB70BF /* playButton.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = playButton.gif; path = ../../../../Downloads/playButton.gif; sourceTree = "<group>"; };
+		253F08601B113DFF00E19C1A /* Abhogi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Abhogi.wav; sourceTree = "<group>"; };
+		253F08621B117D1500E19C1A /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		2570626E1B107CA000C0EE63 /* Wiki Radio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wiki Radio.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257062721B107CA000C0EE63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		257062731B107CA000C0EE63 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -55,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				253F08631B117D1500E19C1A /* MediaPlayer.framework in Frameworks */,
 				002EBA191B10C24200C4A521 /* Foundation.framework in Frameworks */,
 				002EBA171B10C23A00C4A521 /* UIKit.framework in Frameworks */,
 				002EBA151B10C22F00C4A521 /* CoreGraphics.framework in Frameworks */,
@@ -75,6 +76,7 @@
 		257062651B107CA000C0EE63 = {
 			isa = PBXGroup;
 			children = (
+				253F08621B117D1500E19C1A /* MediaPlayer.framework */,
 				257062701B107CA000C0EE63 /* Wiki Radio */,
 				257062861B107CA100C0EE63 /* Wiki RadioTests */,
 				2570626F1B107CA000C0EE63 /* Products */,
@@ -102,7 +104,6 @@
 				257062771B107CA000C0EE63 /* Main.storyboard */,
 				2570627A1B107CA000C0EE63 /* Images.xcassets */,
 				2570627C1B107CA100C0EE63 /* LaunchScreen.xib */,
-				0054C3091B10DA4700AB70BF /* playButton.gif */,
 				257062711B107CA000C0EE63 /* Supporting Files */,
 			);
 			path = "Wiki Radio";
@@ -111,7 +112,7 @@
 		257062711B107CA000C0EE63 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0054C3071B10D9B700AB70BF /* sample.mp3 */,
+				253F08601B113DFF00E19C1A /* Abhogi.wav */,
 				257062721B107CA000C0EE63 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -216,8 +217,7 @@
 			files = (
 				257062791B107CA000C0EE63 /* Main.storyboard in Resources */,
 				2570627E1B107CA100C0EE63 /* LaunchScreen.xib in Resources */,
-				0054C30A1B10DA4700AB70BF /* playButton.gif in Resources */,
-				0054C3081B10D9B700AB70BF /* sample.mp3 in Resources */,
+				253F08611B113DFF00E19C1A /* Abhogi.wav in Resources */,
 				2570627B1B107CA000C0EE63 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
