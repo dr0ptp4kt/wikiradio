@@ -15,39 +15,54 @@ import MediaPlayer
 class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDelegate {
 
     @IBOutlet weak var playButton: UIButton!
-    var randomMusic: AVAudioPlayer?
     var player: AVAudioPlayer?
     var audioSession: AVAudioSession?
     var interruptedOnPlayback = false
     var playing = false
     var paused = false;
     var urlSession: NSURLSession!
+    var currentSong: NSData?
     var nextSong: NSData?
+    var retrievedFirstSong = false
+    var playedFirstSong = false
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        UIApplication.sharedApplication().statusBarHidden = true
         let configuration = NSURLSessionConfiguration.defaultSessionConfiguration()
-        configuration.timeoutIntervalForRequest = 15.0
+        // the default is 60, but we can be more aggressive later if we want
+        // configuration.timeoutIntervalForRequest = 15.0
         urlSession = NSURLSession(configuration: configuration, delegate: self,
         delegateQueue: nil)
     }
     
-    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-        println("good music! finished playing the current downloaded music")
+    func notPlaying() {
         self.playing = false
         self.playButton.setTitle(">", forState: UIControlState.Normal)
         self.playButton.setTitle(">", forState: UIControlState.Highlighted)
-        
-        
+    }
+    
+    func updatePlayingButton() {
+        self.playButton.setTitle("| |", forState: UIControlState.Normal)
+        self.playButton.setTitle("| |", forState: UIControlState.Highlighted)
+    }
+    
+    func play() {
+        self.playing = true
+        self.paused = false
+        self.player!.play()
+    }
+    
+    func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
+        println("good music! finished playing the current downloaded music")
+        self.notPlaying()
         self.playNext()
-        // if we were doing this correctly we would update the button
     }
     
     func audioPlayerBeginInterruption(player: AVAudioPlayer!) {
         println("interrupting")
         if (self.playing) {
             println("interrupted while playing")
-
             self.playing = false
             self.interruptedOnPlayback = true
         }
@@ -58,18 +73,23 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         if (self.interruptedOnPlayback) {
             println("resume playing")
             self.player!.prepareToPlay()
-            self.playing = self.player!.play()
             self.interruptedOnPlayback = false
+            self.playing = self.player!.play()
         }
 
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        UIApplication.sharedApplication().statusBarHidden = true
     }
     
     func playNext() {
+        if (self.playedFirstSong) {
+            self.currentSong = self.nextSong
+        } else {
+            self.playedFirstSong = true
+        }
+        self.retrieveNextSong()
         let dispatchQueue =
         dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         
@@ -78,14 +98,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
             // TODO: make forward button in UI actually immediately play
             // just like the Control Center does (assuming file is
             // downloaded)
-            self!.player = AVAudioPlayer(data: self!.nextSong, error: &error)
+            self!.player = AVAudioPlayer(data: self!.currentSong, error: &error)
             self!.player?.delegate = self!
             self!.player!.prepareToPlay()
-            self!.playing = true
-            self!.paused = false
-            self!.playButton.setTitle("| |", forState: UIControlState.Normal)
-            self!.playButton.setTitle("| |", forState: UIControlState.Highlighted)
-            self!.player!.play()
+            self!.play()
             })
     }
 
@@ -100,9 +116,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         if reason == AVAudioSessionRouteChangeReason.OldDeviceUnavailable.rawValue {
             self.player!.pause()
             self.paused = true
-            self.playing = false
-            self.playButton.setTitle(">", forState: UIControlState.Normal)
-            self.playButton.setTitle(">", forState: UIControlState.Highlighted)
+            self.notPlaying()
         }
 
     }
@@ -113,16 +127,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         case .RemoteControlPause:
             self.player!.pause()
             self.paused = true
-            self.playing = false
-            self.playButton.setTitle(">", forState: UIControlState.Normal)
-            self.playButton.setTitle(">", forState: UIControlState.Highlighted)
+            self.notPlaying()
         case .RemoteControlPlay:
             self.player!.prepareToPlay()
-            self.paused = false
-            self.playing = true
-            self.player!.play()
-            self.playButton.setTitle("| |", forState: UIControlState.Normal)
-            self.playButton.setTitle("| |", forState: UIControlState.Highlighted)
+            self.play()
         case .RemoteControlNextTrack:
             self.playNext()
             // TODO: handle Play/Pause toggle for earbuds
@@ -136,27 +144,8 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
     @IBAction func playForward(sender: AnyObject) {
         self.playNext()
     }
-    @IBAction func playButton(sender: AnyObject) {
-        if self.playing {
-            self.player!.pause()
-            self.paused = true
-            self.playing = false
-            self.playButton.setTitle(">", forState: UIControlState.Normal)
-            self.playButton.setTitle(">", forState: UIControlState.Highlighted)
-            return
-        } else if (self.paused) {
-            self.player!.prepareToPlay()
-            self.paused = false
-            self.playing = true
-            self.player!.play()
-            self.playButton.setTitle("| |", forState: UIControlState.Normal)
-            self.playButton.setTitle("| |", forState: UIControlState.Highlighted)
-            return
-        }
-        
-        self.playing = true;
-        self.playButton.setTitle("| |", forState: UIControlState.Normal)
-        self.playButton.setTitle("| |", forState: UIControlState.Highlighted)
+    
+    func initiateAudio() {
         if (self.audioSession == nil) {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "routeChanged:", name: AVAudioSessionRouteChangeNotification, object: nil)
             self.audioSession = AVAudioSession.sharedInstance()
@@ -172,67 +161,51 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
             // remoteControlReceivedWithEvent does the actual work via the other events
             MPRemoteCommandCenter.sharedCommandCenter().playCommand.addTarget(self, action: "dummyPlayback")
             MPRemoteCommandCenter.sharedCommandCenter().nextTrackCommand.addTarget(self, action: "dummyPlayback")
-            
-            let url = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Zaip.wav")
-            let task = self.urlSession.dataTaskWithURL(url!, completionHandler: {[weak self] (data: NSData!,
-                response: NSURLResponse!, error: NSError!) in
-                /* We got our data here */
-                self!.nextSong = data
-                println("Done")
-                self!.urlSession.finishTasksAndInvalidate() })
-            task.resume()
         }
-        let dispatchQueue =
-        dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
-        
-        dispatch_async(dispatchQueue, {[weak self] in
-            let mainBundle = NSBundle.mainBundle()
-            
-            /* Find the location of our file to feed to the audio player */
+    }
+    
+    func retrieveNextSong() {
+        if (!self.retrievedFirstSong) {
             let filePath = NSBundle.mainBundle().pathForResource("Abhogi", ofType:"wav")
             let fileURL = NSURL(fileURLWithPath: filePath!)
-            var error:NSError?
-            self!.player = AVAudioPlayer(contentsOfURL: fileURL!, error: &error)
-            self!.player?.delegate = self!
-            self!.player!.prepareToPlay()
-            self!.playing = true
-            self!.player!.play()
-
-            /*
-            if let path = filePath{
-                let fileData = NSData(contentsOfFile: path)
-                
-                var error:NSError?
-            
-                self!.randomMusic = AVAudioPlayer(contentsOfURL: <#NSURL!#>, error: <#NSErrorPointer#>)
-                
-                /* Start the audio player */
-                self!.randomMusic = AVAudioPlayer(data: fileData, error: &error)
-                
-                /* Did we get an instance of AVAudioPlayer? */
-                if let player = self!.randomMusic{
-                    /* Set the delegate and start playing */
-                    player.delegate = self
-                    if player.prepareToPlay() && player.play(){
-                        /* Successfully started playing */
-                    } else {
-                        /* Failed to play */
-                    }
-                } else {
-                    /* Failed to instantiate AVAudioPlayer */
-                }
-            }
-*/
-            
-            })
+            self.currentSong = NSData(contentsOfURL: fileURL!)
+            self.retrievedFirstSong = true
+            return
+        }
         
+        let url = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Zaip.wav")
+        let task = self.urlSession.dataTaskWithURL(url!, completionHandler: {[weak self] (data: NSData!,
+            response: NSURLResponse!, error: NSError!) in
+            /* We got our data here */
+            self!.nextSong = data
+            println("Done")
+            self!.urlSession.finishTasksAndInvalidate() })
+        println("about to resume")
+        task.resume()
+        println("resumed")
+    }
+    
+    
+    @IBAction func playButton(sender: AnyObject) {
+        if self.playing {
+            self.player!.pause()
+            self.paused = true
+            self.notPlaying()
+        } else if (self.paused) {
+            self.player!.prepareToPlay()
+            self.updatePlayingButton()
+            self.play()
+        } else {
+            self.initiateAudio()
+            self.retrieveNextSong()
+            self.updatePlayingButton()
+            playNext()
+        }
     }
     
     // defined for runtime safety
     func dummyPlayback() {
     }
-
-        
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
