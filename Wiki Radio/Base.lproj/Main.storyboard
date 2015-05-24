@@ -17,8 +17,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-au-UO2">
-                                <rect key="frame" x="37" y="243" width="110" height="74"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-au-UO2">
+                                <rect key="frame" x="105" y="218" width="110" height="132"/>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="100"/>
                                 <state key="normal" title="&gt;">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,8 +28,11 @@
                                     <action selector="playButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VIg-LT-jWN"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eE1-69-bOg">
-                                <rect key="frame" x="207" y="269" width="59" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eE1-69-bOg">
+                                <rect key="frame" x="131" y="385" width="59" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="59" id="n02-Zk-P5p"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="black" pointSize="42"/>
                                 <state key="normal" title="&gt;&gt;">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -41,6 +44,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerY" secondItem="SdQ-au-UO2" secondAttribute="centerY" id="2C3-de-JCT"/>
+                            <constraint firstItem="eE1-69-bOg" firstAttribute="bottom" secondItem="SdQ-au-UO2" secondAttribute="bottom" constant="65" id="GMx-lK-QGr"/>
+                            <constraint firstItem="eE1-69-bOg" firstAttribute="top" secondItem="SdQ-au-UO2" secondAttribute="bottom" constant="35" id="QZK-xv-kcN"/>
+                            <constraint firstAttribute="centerX" secondItem="SdQ-au-UO2" secondAttribute="centerX" id="dM3-z4-tE5"/>
+                            <constraint firstItem="eE1-69-bOg" firstAttribute="centerX" secondItem="SdQ-au-UO2" secondAttribute="centerX" id="eQa-BP-Hjc"/>
+                            <constraint firstAttribute="centerY" secondItem="eE1-69-bOg" secondAttribute="centerY" constant="-116" id="z9D-Ab-Hfq"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="playButton" destination="SdQ-au-UO2" id="dmT-R7-bAq"/>
