@@ -161,9 +161,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
             
 
             // remoteControlReceivedWithEvent does the actual work via the other events
-            /// TODO: get play and pause in control center working (again?)
-            //MPRemoteCommandCenter.sharedCommandCenter().playCommand.addTarget(self, action: "dummyPlayback")
-            //MPRemoteCommandCenter.sharedCommandCenter().pauseCommand.addTarget(self, action: "dummyPlayback")
+            // REMEMBER: the pause button only works on a physical device
+            // The simulator Control Center will only show the Play button not toggling it
+            // and will still show the forward button
+            MPRemoteCommandCenter.sharedCommandCenter().playCommand.addTarget(self, action: "dummyPlayback")
             MPRemoteCommandCenter.sharedCommandCenter().nextTrackCommand.addTarget(self, action: "dummyPlayback")
         }
     }

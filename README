@@ -1,0 +1,13 @@
+Some potentially useful URL examples for the API:
+
+Get just file names within a category containing files:
+
+https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Audio%20files&cmtype=file&cmlimit=500
+
+Get details for a specific file:
+
+https://commons.wikimedia.org/w/api.php?action=query&titles=File:ZaiAUDIO.wav&prop=videoinfo&viprop=canonicaltitle|size|mediatype|metadata|commonmetadata|extmetadata|bitdepth|derivatives
+
+Get details for a bunch of files at once (slow when gcmlimit is large) -
+
+https://commons.wikimedia.org/w/api.php?action=query&prop=videoinfo&viprop=canonicaltitle|size|mediatype|metadata|commonmetadata|extmetadata|bitdepth|derivatives&generator=categorymembers&gcmtitle=Category:Audio files&gcmtype=file&gcmlimit=10
