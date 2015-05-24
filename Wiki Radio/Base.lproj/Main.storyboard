@@ -17,9 +17,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-au-UO2">
-                                <rect key="frame" x="136" y="256" width="64" height="56"/>
-                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="42"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdQ-au-UO2">
+                                <rect key="frame" x="37" y="243" width="110" height="74"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="100"/>
                                 <state key="normal" title="&gt;">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,12 +28,19 @@
                                     <action selector="playButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VIg-LT-jWN"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eE1-69-bOg">
+                                <rect key="frame" x="207" y="269" width="59" height="30"/>
+                                <fontDescription key="fontDescription" type="system" weight="black" pointSize="42"/>
+                                <state key="normal" title="&gt;&gt;">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="playForward:" destination="BYZ-38-t0r" eventType="touchDragInside" id="Ou1-X7-Vzq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="SdQ-au-UO2" secondAttribute="centerX" constant="-8" id="Vbb-uf-8vB"/>
-                            <constraint firstAttribute="centerY" secondItem="SdQ-au-UO2" secondAttribute="centerY" id="hxW-ki-BVN"/>
-                        </constraints>
                     </view>
                     <connections>
                         <outlet property="playButton" destination="SdQ-au-UO2" id="dmT-R7-bAq"/>

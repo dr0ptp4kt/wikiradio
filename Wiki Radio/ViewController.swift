@@ -37,6 +37,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         self.playing = false
         self.playButton.setTitle(">", forState: UIControlState.Normal)
         self.playButton.setTitle(">", forState: UIControlState.Highlighted)
+        
+        
+        self.playNext()
+        // if we were doing this correctly we would update the button
     }
     
     func audioPlayerBeginInterruption(player: AVAudioPlayer!) {
@@ -70,13 +74,19 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)
         
         dispatch_async(dispatchQueue, {[weak self] in
-        var error:NSError?
-        self!.player = AVAudioPlayer(data: self!.nextSong, error: &error)
-        self!.player?.delegate = self!
-        self!.player!.prepareToPlay()
-        self!.playing = true
-        self!.player!.play()
-        })
+            var error:NSError?
+            // TODO: make forward button in UI actually immediately play
+            // just like the Control Center does (assuming file is
+            // downloaded)
+            self!.player = AVAudioPlayer(data: self!.nextSong, error: &error)
+            self!.player?.delegate = self!
+            self!.player!.prepareToPlay()
+            self!.playing = true
+            self!.paused = false
+            self!.playButton.setTitle("| |", forState: UIControlState.Normal)
+            self!.playButton.setTitle("| |", forState: UIControlState.Highlighted)
+            self!.player!.play()
+            })
     }
 
     @objc func routeChanged(notification: NSNotification){
@@ -123,6 +133,9 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         }
     }
     
+    @IBAction func playForward(sender: AnyObject) {
+        self.playNext()
+    }
     @IBAction func playButton(sender: AnyObject) {
         if self.playing {
             self.player!.pause()
@@ -160,7 +173,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
             MPRemoteCommandCenter.sharedCommandCenter().playCommand.addTarget(self, action: "dummyPlayback")
             MPRemoteCommandCenter.sharedCommandCenter().nextTrackCommand.addTarget(self, action: "dummyPlayback")
             
-            let url = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Arhin.wav")
+            let url = NSURL(string: "https://upload.wikimedia.org/wikipedia/commons/d/d4/Zaip.wav")
             let task = self.urlSession.dataTaskWithURL(url!, completionHandler: {[weak self] (data: NSData!,
                 response: NSURLResponse!, error: NSError!) in
                 /* We got our data here */
