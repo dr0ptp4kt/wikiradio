@@ -1,5 +1,11 @@
 Some potentially useful URL examples for the API:
 
+Get 100 categories:
+
+https://commons.wikimedia.org/w/api.php?action=opensearch&search=Category:Audio%20files&limit=100
+
+In the future we may want to find a way to identify a more expansive list of categories. 
+
 Get just file names within a category containing files:
 
 https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers&cmtitle=Category:Audio%20files&cmtype=file&cmlimit=500
