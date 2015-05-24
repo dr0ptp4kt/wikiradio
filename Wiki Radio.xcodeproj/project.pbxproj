@@ -19,6 +19,8 @@
 		2570627B1B107CA000C0EE63 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2570627A1B107CA000C0EE63 /* Images.xcassets */; };
 		2570627E1B107CA100C0EE63 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2570627C1B107CA100C0EE63 /* LaunchScreen.xib */; };
 		2570628A1B107CA100C0EE63 /* Wiki_RadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257062891B107CA100C0EE63 /* Wiki_RadioTests.swift */; };
+		2582040F1B12671200B9B097 /* Ogg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2582040E1B12671200B9B097 /* Ogg.framework */; };
+		258204111B12672100B9B097 /* Vorbis.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 258204101B12672100B9B097 /* Vorbis.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +50,8 @@
 		257062831B107CA100C0EE63 /* Wiki RadioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Wiki RadioTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		257062881B107CA100C0EE63 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		257062891B107CA100C0EE63 /* Wiki_RadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Wiki_RadioTests.swift; sourceTree = "<group>"; };
+		2582040E1B12671200B9B097 /* Ogg.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Ogg.framework; path = Frameworks/IDZPrecompiledOgg/Ogg.framework; sourceTree = "<group>"; };
+		258204101B12672100B9B097 /* Vorbis.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vorbis.framework; path = Frameworks/IDZPrecompiledVorbis/Vorbis.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				258204111B12672100B9B097 /* Vorbis.framework in Frameworks */,
+				2582040F1B12671200B9B097 /* Ogg.framework in Frameworks */,
 				253F08631B117D1500E19C1A /* MediaPlayer.framework in Frameworks */,
 				002EBA191B10C24200C4A521 /* Foundation.framework in Frameworks */,
 				002EBA171B10C23A00C4A521 /* UIKit.framework in Frameworks */,
@@ -76,6 +82,8 @@
 		257062651B107CA000C0EE63 = {
 			isa = PBXGroup;
 			children = (
+				258204101B12672100B9B097 /* Vorbis.framework */,
+				2582040E1B12671200B9B097 /* Ogg.framework */,
 				253F08621B117D1500E19C1A /* MediaPlayer.framework */,
 				257062701B107CA000C0EE63 /* Wiki Radio */,
 				257062861B107CA100C0EE63 /* Wiki RadioTests */,
@@ -366,6 +374,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external_frameworks",
+					"$(PROJECT_DIR)/Frameworks/IDZPrecompiledOgg",
+					"$(PROJECT_DIR)/Frameworks/IDZPrecompiledVorbis",
+				);
 				INFOPLIST_FILE = "Wiki Radio/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -377,6 +391,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/external_frameworks",
+					"$(PROJECT_DIR)/Frameworks/IDZPrecompiledOgg",
+					"$(PROJECT_DIR)/Frameworks/IDZPrecompiledVorbis",
+				);
 				INFOPLIST_FILE = "Wiki Radio/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

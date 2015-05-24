@@ -55,7 +55,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
         println("good music! finished playing the current downloaded music")
-        self.notPlaying()
+        self.updatePlayingButton()
         self.playNext()
     }
     
@@ -130,8 +130,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
             self.notPlaying()
         case .RemoteControlPlay:
             self.player!.prepareToPlay()
+            self.updatePlayingButton()
             self.play()
         case .RemoteControlNextTrack:
+            self.updatePlayingButton()
             self.playNext()
             // TODO: handle Play/Pause toggle for earbuds
             // TODO: handle next track as well (Control center and double tab earbud)
@@ -139,10 +141,6 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         default:
             break
         }
-    }
-    
-    @IBAction func playForward(sender: AnyObject) {
-        self.playNext()
     }
     
     func initiateAudio() {
@@ -208,6 +206,10 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
         }
     }
     
+    @IBAction func playNextTrack(sender: AnyObject) {
+        self.updatePlayingButton()
+        self.playNext()
+    }
     // defined for runtime safety
     func dummyPlayback() {
     }
