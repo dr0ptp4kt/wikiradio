@@ -33,7 +33,7 @@ class ViewController: UIViewController, AVAudioPlayerDelegate, NSURLSessionDeleg
     }
     
     func audioPlayerDidFinishPlaying(player: AVAudioPlayer!, successfully flag: Bool) {
-        println("finished playing the current downloaded music")
+        println("good music! finished playing the current downloaded music")
         self.playing = false
         self.playButton.setTitle(">", forState: UIControlState.Normal)
         self.playButton.setTitle(">", forState: UIControlState.Highlighted)
